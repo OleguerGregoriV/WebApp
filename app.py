@@ -18,12 +18,11 @@ def register():
             return error_message('Password and confirmation must match')
         return redirect(url_for('home'))
     
-    return render_template('register.html')
+    return render_template('register.html', form_type='register')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    
-    return "To be implemented"
+    return render_template('register.html', form_type='login')
 
 @app.route('/')
 def home():

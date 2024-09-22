@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
+    <title>{{ 'Register' if form_type == 'register' else 'Login' }} Form</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,7 +16,7 @@
         }
         .form-container {
             background-color: #fff;
-            padding: 20px 40px; /* Added padding for left and right */
+            padding: 20px 40px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             max-width: 400px;
@@ -55,14 +55,26 @@
 </head>
 <body>
     <div class="form-container">
-        <h2>Register</h2>
-        <form action="{{ url_for('register') }}" method="POST">
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
-            <input type="password" name="confirm_password" placeholder="Confirm Password">
-            <input type="submit" value="Register">
-        </form>
-        <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a>.</p>
+        <!-- Conditional Title for Registration or Login -->
+        <h2>{{ 'Register' if form_type == 'register' else 'Login' }}</h2>
+        
+        <!-- Conditional Form Rendering -->
+        {% if form_type == 'register' %}
+            <form action="{{ url_for('register') }}" method="POST">
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
+                <input type="password" name="confirm_password" placeholder="Confirm Password">
+                <input type="submit" value="Register">
+            </form>
+            <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a>.</p>
+        {% elif form_type == 'login' %}
+            <form action="{{ url_for('login') }}" method="POST">
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
+                <input type="submit" value="Login">
+            </form>
+            <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a>.</p>
+        {% endif %}
     </div>
 </body>
 </html>
