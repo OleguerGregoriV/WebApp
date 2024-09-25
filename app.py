@@ -14,7 +14,7 @@ def get_db():
     if db is None:
         db = g._database = sqlite3.connect(DATABASE)
         db.row_factory = sqlite3.Row
-        # Create tables for
+       
 
     return db
 
@@ -54,25 +54,20 @@ def register():
         db = get_db()
         password_hash = generate_password_hash(password)
         try:
-            # Use one cursor for both queries
+        
             cursor = db.cursor()
-
             # Insert the new user into the database
             cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', 
                         (username, password_hash))
             
-            # Commit the transaction
             db.commit()
 
-            # Fetch and print all users to visualize the table
             cursor.execute('SELECT * FROM users')
             users = cursor.fetchall()  # Fetch all rows
 
-            # Print the users for debugging purposes
             for user in users:
                 print(user)
 
-            # Redirect to the login page after success
             return redirect('/login')
 
         except Exception as e:
@@ -89,7 +84,20 @@ def login():
         username = request.form['username']
         password = request.form['password']  
         if not username or not password:
-            return error_message('Must provide both username and password for the login')        
+            return error_message('Must provide both username and password for the login')      
+        db = get_db()
+        cursor = db.cursor()
+        users_data = cursor.execute('SELECT * FROM users where username = ?',username)
+        user = users_data.fetchone()
+        if not user:
+            return error_message("The inserted user does not exist or the password does not match the user's password.")      
+        stored_hash_pwd = user['password']
+
+        if not check_password_hash(pwhash=stored_hash_pwd,password=password):
+            return error_message("The inserted user does not exist or the password does not match the user's password.")
+
+        return "Congrats, YOU HAVE LOGGED IN"  ## Implement the main page of the APP
+
     return render_template('identification.html', form_type='login')
 
 @app.route('/')
