@@ -96,13 +96,28 @@ def login():
         if not check_password_hash(pwhash=stored_hash_pwd,password=password):
             return error_message("The inserted user does not exist or the password does not match the user's password.")
 
-        return "Congrats, YOU HAVE LOGGED IN"  ## Implement the main page of the APP
+        return render_template('main.html', user=user, tickets=[])
 
     return render_template('identification.html', form_type='login')
 
 @app.route('/')
 def home():
-    
+    return "TODO"
+
+@app.route('/main')
+def main():
+    return "TODO"
+
+@app.route('/calendar')
+def calendar_view():
+    return "TODO"
+
+@app.route('/logout')
+def logout():
+    return "TODO"
+
+@app.route('/create_ticket')
+def create_ticket():
     return "TODO"
 
 if __name__ == '__main__':

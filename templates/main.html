@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h2>Welcome, {{ user.username }}</h2>
+
+    <section class="tickets-section">
+        <h3>Your Tickets</h3>
+        <ul>
+            {% for ticket in tickets %}
+                <li>
+                    <strong>{{ ticket.title }}</strong> - {{ ticket.description }} 
+                    <em>Due: {{ ticket.due_date }}</em>
+                </li>
+            {% else %}
+                <li>No tickets found. Create a new one!</li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('create_ticket') }}" class="btn">Create New Ticket</a>
+    </section>
+
+    <section class="calendar-overview">
+        <h3>Upcoming Deadlines</h3>
+        <!-- You can include an embedded mini-calendar or a list of upcoming tasks here -->
+    </section>
+{% endblock %}
