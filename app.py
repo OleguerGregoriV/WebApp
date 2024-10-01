@@ -1,10 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for, g
-from helpers import error_message
+from flask import Flask, render_template, request, redirect, url_for, g, session
+from flask_session import Session
+from helpers import error_message, login_required
 from werkzeug.security import check_password_hash, generate_password_hash
 import sqlite3
 
 # Flask configuration
 app = Flask(__name__)
+ # Configure session to use filesystem (instead of signed cookies)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)   
 
 # Database configuration
 DATABASE = 'app.db'
@@ -96,27 +101,38 @@ def login():
         if not check_password_hash(pwhash=stored_hash_pwd,password=password):
             return error_message("The inserted user does not exist or the password does not match the user's password.")
 
-        return render_template('main.html', user=user, tickets=[])
+        session['user_id'] = user['id']
+        session['username'] = user['username']
+        # session.permanent = False
+        return redirect('/main')
 
     return render_template('identification.html', form_type='login')
 
 @app.route('/')
+@login_required
 def home():
     return "TODO"
 
 @app.route('/main')
+@login_required
 def main():
+    if request.method == 'GET':
+        print(session['user_id'])
+        return render_template('main.html', username=session['username'], tickets=[])
     return "TODO"
 
 @app.route('/calendar')
+@login_required
 def calendar_view():
     return "TODO"
 
 @app.route('/logout')
+@login_required
 def logout():
     return "TODO"
 
 @app.route('/create_ticket')
+@login_required
 def create_ticket():
     return "TODO"
 
