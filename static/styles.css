@@ -1,0 +1,122 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif; /* A clean, modern font */
+    background-color: #f7f7f7; /* Light background */
+    color: #333; /* Neutral text color */
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.nav-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #666;
+    font-size: 16px;
+}
+
+.nav-links a:hover {
+    color: #007bff; /* Accent color */
+}
+
+/* Sidebar */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.sidebar ul li a:hover {
+    color: #007bff;
+}
+
+/* Content */
+.content {
+    flex: 1;
+    padding: 40px;
+    background-color: #f7f7f7;
+}
+
+h2, h3 {
+    color: #333;
+}
+
+.tickets-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.tickets-section ul li {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Button */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Calendar Section */
+.calendar-overview {
+    margin-top: 40px;
+}
+
+.calendar-overview h3 {
+    color: #333;
+}
+
+.calendar-overview .mini-calendar {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
