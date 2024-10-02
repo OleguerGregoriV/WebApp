@@ -7,21 +7,72 @@
 
     <section class="tickets-section">
         <h3>Your Tickets</h3>
-        <ul>
+        <ul id="ticket-list">
             {% for ticket in tickets %}
                 <li>
                     <strong>{{ ticket.title }}</strong> - {{ ticket.description }} 
                     <em>Due: {{ ticket.due_date }}</em>
                 </li>
             {% else %}
-                <li>No tickets found. Create a new one!</li>
+                <li id="no-tickets">No tickets found. Create a new one!</li>
             {% endfor %}
         </ul>
-        <a href="{{ url_for('create_ticket') }}" class="btn">Create New Ticket</a>
+
+        <!-- Form to create new tickets -->
+        <h3>Create New Ticket</h3>
+        <form id="ticket-form">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+            
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" required>
+            
+            <label for="due_date">Due Date:</label>
+            <input type="date" id="due_date" name="due_date" required>
+            
+            <button type="submit" class="btn">Create New Ticket</button>
+        </form>
     </section>
 
     <section class="calendar-overview">
         <h3>Upcoming Deadlines</h3>
-        <!-- You can include an embedded mini-calendar or a list of upcoming tasks here -->
+        <!-- Add calendar here later -->
     </section>
+
+    <!-- Add jQuery for simplicity or fetch API if you prefer vanilla JS -->
+    <script>
+        document.getElementById("ticket-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let title = document.getElementById("title").value;
+            let description = document.getElementById("description").value;
+            let due_date = document.getElementById("due_date").value;
+
+            fetch("/create_ticket", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ 
+                    title: title, 
+                    description: description, 
+                    due_date: due_date 
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("ticket-form").reset();
+
+                const noTicketsMessage = document.getElementById("no-tickets");
+                if (noTicketsMessage) {
+                    noTicketsMessage.remove();
+                }
+
+                const newTicket = document.createElement("li");
+                newTicket.innerHTML = `<strong>${data.title}</strong> - ${data.description} <em>Due: ${data.due_date}</em>`;
+                document.getElementById("ticket-list").appendChild(newTicket);
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
 {% endblock %}

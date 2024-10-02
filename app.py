@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, g, session
+from flask import Flask, render_template, request, redirect, url_for, g, session, jsonify
 from flask_session import Session
 from helpers import error_message, login_required
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -11,6 +11,13 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)   
 
+@app.after_request
+def after_request(response):
+    """Ensure responses aren't cached"""
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Expires"] = 0
+    response.headers["Pragma"] = "no-cache"
+    return response
 # Database configuration
 DATABASE = 'app.db'
 
@@ -68,10 +75,7 @@ def register():
             db.commit()
 
             cursor.execute('SELECT * FROM users')
-            users = cursor.fetchall()  # Fetch all rows
 
-            for user in users:
-                print(user)
 
             return redirect('/login')
 
@@ -117,8 +121,19 @@ def home():
 @login_required
 def main():
     if request.method == 'GET':
-        print(session['user_id'])
-        return render_template('main.html', username=session['username'], tickets=[])
+        tickets = []
+        try:
+            db = get_db()
+            cursor = db.cursor()
+            
+            user_tickets = cursor.execute('SELECT * FROM tickets WHERE user_id = ?', (1,))
+
+            tickets = user_tickets.fetchall()
+
+        except Exception as e:
+            print(e)
+            return error_message(e)
+        return render_template('main.html', username=session['username'], tickets=tickets)
     return "TODO"
 
 @app.route('/calendar')
@@ -131,10 +146,29 @@ def calendar_view():
 def logout():
     return "TODO"
 
-@app.route('/create_ticket')
-@login_required
+@app.route('/create_ticket', methods=['POST'])
 def create_ticket():
-    return "TODO"
+    
+    data = request.get_json()
+    title = data.get('title')
+    description = data.get('description')
+    due_date = data.get('due_date')
+    
+    db = get_db()
+    try:
+        cursor = db.cursor()
+        cursor.execute('INSERT INTO tickets (user_id, title, description, due_date, is_deleted) VALUES (?,?,?,?,?)',(session['user_id'], title, description, due_date, 0))
+
+        db.commit()
+    except Exception as e:
+        return error_message(e)
+    # Return the new ticket data as a JSON response
+    return jsonify({
+        'id': 1,
+        'title': title,
+        'description': description,
+        'due_date': due_date
+    })
 
 if __name__ == '__main__':
     init_db()
