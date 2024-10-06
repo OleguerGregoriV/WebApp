@@ -203,6 +203,20 @@ def edit_ticket(ticket_id):
     return render_template('edit_ticket.html', ticket=ticket)
 
 
+@app.route('/delete_ticket/<int:ticket_id>', methods=['POST'])
+@login_required
+def delete_ticket(ticket_id):
+    db = get_db()
+    try:
+        cursor = db.cursor()
+        cursor.execute('DELETE FROM tickets WHERE id = ?', (ticket_id,))
+        db.commit()
+        return redirect(url_for('main'))  # Redirect back to the main page
+    except Exception as e:
+        return error_message(e)
+
+
+
 if __name__ == '__main__':
     init_db()
     session.clear()

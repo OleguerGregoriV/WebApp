@@ -117,6 +117,16 @@ h2, h3 {
     background-color: #218838;
 }
 
+.btn-danger {
+    color: white;
+    padding: 5px 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 
 /* Button */
 .btn {
