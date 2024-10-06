@@ -158,3 +158,40 @@ h2, h3 {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+/* Ticket History Table */
+.ticket-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.ticket-history-table th,
+.ticket-history-table td {
+    border: 1px solid #ddd;
+    padding: 12px; /* Add more padding for spacing */
+    text-align: left;
+}
+
+.ticket-history-table th {
+    background-color: #f2f2f2;
+    color: #333;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.ticket-history-table td {
+    vertical-align: middle;
+}
+
+.ticket-history-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.ticket-history-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.ticket-actions {
+    display: flex;
+    gap: 10px; /* Add space between buttons */
+}

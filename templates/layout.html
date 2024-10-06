@@ -13,7 +13,6 @@
         </div>
         <div class="nav-links">
             <a href="{{ url_for('main') }}">Home</a>
-            <a href="{{ url_for('calendar_view') }}">Calendar</a>
             <a href="{{ url_for('logout') }}">Logout</a>
         </div>
     </div>
@@ -23,7 +22,7 @@
             <ul>
                 <li><a href="{{ url_for('main') }}">Dashboard</a></li>
                 <li><a href="{{ url_for('create_ticket') }}">Archived Tickets</a></li>
-                <li><a href="{{ url_for('calendar_view') }}">History</a></li>
+                <li><a href="{{ url_for('ticket_history') }}">History</a></li>
             </ul>
         </div>
 

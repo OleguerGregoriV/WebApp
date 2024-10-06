@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}Ticket History{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <h2>Your Ticket History</h2>
+        <table class="ticket-history-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Due Date</th>
+                    <th>Archived</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                <tr>
+                    <td>{{ ticket.title }}</td>
+                    <td>{{ ticket.description }}</td>
+                    <td>{{ ticket.due_date }}</td>
+                    <td>{{ 'Yes' if ticket.is_archived else 'No' }}</td>
+                    <td class="ticket-actions">
+                        <a href="{{ url_for('edit_ticket', ticket_id=ticket.id) }}" class="btn btn-edit">Edit</a>
+                        <form action="{{ url_for('delete_ticket', ticket_id=ticket.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('main') }}" class="btn">Back to Dashboard</a>
+    </div>
+{% endblock %}

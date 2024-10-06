@@ -137,10 +137,7 @@ def main():
         return render_template('main.html', username=session['username'], tickets=tickets)
     return "TODO"
 
-@app.route('/calendar')
-@login_required
-def calendar_view():
-    return "TODO"
+
 
 @app.route("/logout")
 def logout():
@@ -216,6 +213,21 @@ def delete_ticket(ticket_id):
         return redirect(url_for('main'))  # Redirect back to the main page
     except Exception as e:
         return error_message(e)
+    
+@app.route('/ticket_history')
+@login_required
+def ticket_history():
+    db = get_db()
+    cursor = db.cursor()
+    
+    try:
+        # Fetch all tickets for the logged-in user
+        tickets = cursor.execute('SELECT * FROM tickets WHERE user_id = ?', (session['user_id'],)).fetchall()
+    except Exception as e:
+        return error_message(str(e))
+    
+    return render_template('ticket_history.html', tickets=tickets)
+
 
 
 
