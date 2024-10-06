@@ -115,7 +115,8 @@ def login():
 @app.route('/')
 @login_required
 def home():
-    return "TODO"
+    
+    return redirect('/main')
 
 @app.route('/main')
 @login_required
@@ -141,10 +142,15 @@ def main():
 def calendar_view():
     return "TODO"
 
-@app.route('/logout')
-@login_required
+@app.route("/logout")
 def logout():
-    return "TODO"
+    """Log user out"""
+
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to login form
+    return redirect("/login")
 
 @app.route('/create_ticket', methods=['POST'])
 @login_required
