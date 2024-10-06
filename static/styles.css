@@ -77,18 +77,46 @@ h2, h3 {
     color: #333;
 }
 
+/* Ticket list styles */
 .tickets-section ul {
     list-style: none;
     padding: 0;
 }
 
-.tickets-section ul li {
+.ticket-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #ffffff;
     border-radius: 8px;
     padding: 10px 15px;
     margin-bottom: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+/* Ticket details (on the left) */
+.ticket-details {
+    flex-grow: 1;
+}
+
+/* Edit button on the right */
+.ticket-actions {
+    margin-left: 20px;
+}
+
+.btn-edit {
+    padding: 5px 10px;
+    background-color: #28a745; /* Green color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-edit:hover {
+    background-color: #218838;
+}
+
 
 /* Button */
 .btn {

@@ -147,6 +147,7 @@ def logout():
     return "TODO"
 
 @app.route('/create_ticket', methods=['POST'])
+@login_required
 def create_ticket():
     
     data = request.get_json()
@@ -169,6 +170,32 @@ def create_ticket():
         'description': description,
         'due_date': due_date
     })
+
+
+@app.route('/ticket/<int:ticket_id>', methods=['GET', 'POST'])
+@login_required
+def edit_ticket(ticket_id):
+    db = get_db()  # Connect to your database
+    cursor = db.cursor()
+
+    # Fetch the specific ticket from the database
+    ticket = cursor.execute('SELECT * FROM tickets WHERE id = ?', (ticket_id,)).fetchone()
+
+    if request.method == 'POST':
+        # Handle the form submission to update the ticket
+        title = request.form['title']
+        description = request.form['description']
+        due_date = request.form['due_date']
+
+        # Update the ticket in the database
+        cursor.execute('UPDATE tickets SET title = ?, description = ?, due_date = ? WHERE id = ?',
+                       (title, description, due_date, ticket_id))
+        db.commit()
+
+        return redirect(url_for('main'))  # Redirect back to the dashboard
+
+    return render_template('edit_ticket.html', ticket=ticket)
+
 
 if __name__ == '__main__':
     init_db()
