@@ -127,7 +127,7 @@ def main():
             db = get_db()
             cursor = db.cursor()
             
-            user_tickets = cursor.execute('SELECT * FROM tickets WHERE user_id = ?', (1,))
+            user_tickets = cursor.execute('SELECT * FROM tickets WHERE user_id = ? and is_deleted = 0 and is_archived = 0 ORDER BY due_date ASC ', (1,))
 
             tickets = user_tickets.fetchall()
 
@@ -192,10 +192,12 @@ def edit_ticket(ticket_id):
         title = request.form['title']
         description = request.form['description']
         due_date = request.form['due_date']
+        archive = request.form.get('archive')
+        is_archived = 1 if archive else 0
 
         # Update the ticket in the database
-        cursor.execute('UPDATE tickets SET title = ?, description = ?, due_date = ? WHERE id = ?',
-                       (title, description, due_date, ticket_id))
+        cursor.execute('UPDATE tickets SET title = ?, description = ?, due_date = ?, is_archived = ? WHERE id = ?',
+                       (title, description, due_date, is_archived, ticket_id))
         db.commit()
 
         return redirect(url_for('main'))  # Redirect back to the dashboard
@@ -209,7 +211,7 @@ def delete_ticket(ticket_id):
     db = get_db()
     try:
         cursor = db.cursor()
-        cursor.execute('DELETE FROM tickets WHERE id = ?', (ticket_id,))
+        cursor.execute('UPDATE tickets SET is_deleted = 1 WHERE id = ?', (ticket_id,))
         db.commit()
         return redirect(url_for('main'))  # Redirect back to the main page
     except Exception as e:

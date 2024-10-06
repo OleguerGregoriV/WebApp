@@ -21,7 +21,12 @@
             <input type="date" id="due_date" name="due_date" value="{{ ticket.due_date }}" required>
         </div>
 
-        <button type="submit" class="btn">Update Ticket</button>
+        <div class="form-group">
+            <input type="checkbox" id="archive" name="archive" value="1" {% if ticket.is_archived %}checked{% endif %}>
+            <label for="archive">Archive</label>
+        </div>
+
+        <button type="submit" class="btn">Save Changes</button>
     </form>
 
     <a href="{{ url_for('main') }}" class="btn">Cancel</a>
