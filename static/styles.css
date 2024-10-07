@@ -118,10 +118,8 @@ h2, h3 {
 }
 
 .btn-danger {
-    color: white;
     padding: 5px 10px;
     background-color: red;
-    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -131,9 +129,7 @@ h2, h3 {
 /* Button */
 .btn {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
+    color: white;
     text-decoration: none;
     border-radius: 5px;
     margin-top: 15px;

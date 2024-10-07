@@ -38,6 +38,10 @@ def init_db():
         with app.open_resource(resource='sql_scripts/users.sql',mode='r') as f:
             cursor.executescript(f.read())
         db.commit()  # Commit the changes to the database
+        
+        with app.open_resource(resource='sql_scripts/tickets.sql',mode='r') as t:
+            cursor.executescript(t.read())            
+        db.commit()  # Commit the changes to the database
 
 @app.teardown_appcontext
 def close_connection(exception):
@@ -96,7 +100,7 @@ def login():
             return error_message('Must provide both username and password for the login')      
         db = get_db()
         cursor = db.cursor()
-        users_data = cursor.execute('SELECT * FROM users where username = ?',username)
+        users_data = cursor.execute('SELECT * FROM users where username = ?', (username,))
         user = users_data.fetchone()
         if not user:
             return error_message("The inserted user does not exist or the password does not match the user's password.")      
@@ -213,6 +217,18 @@ def delete_ticket(ticket_id):
         return redirect(url_for('main'))  # Redirect back to the main page
     except Exception as e:
         return error_message(e)
+    
+@app.route('/permanently_delete_ticket/<int:ticket_id>', methods=['POST'])
+@login_required
+def permanently_delete_ticket(ticket_id):
+    db = get_db()
+    try:
+        cursor = db.cursor()
+        cursor.execute('DELETE from tickets WHERE id = ?', (ticket_id,))
+        db.commit()
+        return redirect(url_for('main'))  # Redirect back to the main page
+    except Exception as e:
+        return error_message(e)    
     
 @app.route('/ticket_history')
 @login_required
