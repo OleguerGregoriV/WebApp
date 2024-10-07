@@ -168,11 +168,13 @@ def create_ticket():
         cursor.execute('INSERT INTO tickets (user_id, title, description, due_date, is_deleted) VALUES (?,?,?,?,?)',(session['user_id'], title, description, due_date, 0))
 
         db.commit()
+
+        ticket_id = cursor.lastrowid
     except Exception as e:
         return error_message(e)
     # Return the new ticket data as a JSON response
     return jsonify({
-        'id': 1,
+        'id': ticket_id,
         'title': title,
         'description': description,
         'due_date': due_date

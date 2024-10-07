@@ -102,6 +102,8 @@ h2, h3 {
 /* Edit button on the right */
 .ticket-actions {
     margin-left: 20px;
+        display: flex;
+        gap: 10px; /* Add space between buttons */
 }
 
 .btn-edit {
@@ -187,7 +189,4 @@ h2, h3 {
     background-color: #f1f1f1;
 }
 
-.ticket-actions {
-    display: flex;
-    gap: 10px; /* Add space between buttons */
-}
+
