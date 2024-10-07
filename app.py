@@ -226,7 +226,7 @@ def permanently_delete_ticket(ticket_id):
         cursor = db.cursor()
         cursor.execute('DELETE from tickets WHERE id = ?', (ticket_id,))
         db.commit()
-        return redirect(url_for('main'))  # Redirect back to the main page
+        return redirect(url_for('ticket_history'))  # Redirect back to the main page
     except Exception as e:
         return error_message(e)    
     
