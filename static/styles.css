@@ -101,7 +101,7 @@ h2, h3 {
 
 /* Edit button on the right */
 .ticket-actions {
-    margin-left: 20px;
+        /*margin-left: 20px; */
         display: flex;
         gap: 10px; /* Add space between buttons */
 }

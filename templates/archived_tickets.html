@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}Archived Tickets{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <h2>Your Archived Tickets</h2>
+        <table class="ticket-history-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Due Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                <tr>
+                    <td>{{ ticket.title }}</td>
+                    <td>{{ ticket.description }}</td>
+                    <td>{{ ticket.due_date }}</td>
+                    <td>{{ 'Yes' if ticket.is_archived else 'No' }}</td>
+                    <td class="ticket-actions">
+                        <a href="{{ url_for('edit_ticket', ticket_id=ticket.id) }}" class="btn btn-edit">Edit</a>
+                        <form action="{{ url_for('permanently_delete_ticket', ticket_id=ticket.id) }}" method="POST" onsubmit="return confirm('Are you sure you want to permanently delete this ticket? This action cannot be undone.');">
+                            <button type="submit" class="btn btn-danger">Permanently Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('main') }}" class="btn">Back to Dashboard</a>
+    </div>
+{% endblock %}

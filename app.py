@@ -247,6 +247,21 @@ def ticket_history():
     return render_template('ticket_history.html', tickets=tickets)
 
 
+@app.route('/archive_ticket')
+@login_required
+def archive_ticket():
+    db = get_db()
+    cursor = db.cursor()
+    
+    try:
+        # Fetch all tickets for the logged-in user
+        tickets = cursor.execute('SELECT * FROM tickets WHERE is_archived = 1 and user_id = ?', (session['user_id'],)).fetchall()
+    except Exception as e:
+        return error_message(str(e))
+    
+    return render_template('ticket_history.html', tickets=tickets)
+
+
 
 
 if __name__ == '__main__':
