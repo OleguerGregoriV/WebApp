@@ -122,6 +122,7 @@ h2, h3 {
 .btn-danger {
     padding: 5px 10px;
     background-color: red;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -129,15 +130,39 @@ h2, h3 {
 
 
 /* Button */
-.btn {
+.btn-create_ticket {
     display: inline-block;
+    background-color: chocolate;
     color: white;
     text-decoration: none;
     border-radius: 5px;
     margin-top: 15px;
 }
 
-.btn:hover {
+.btn-general {
+    padding: 5px 10px;
+    background-color: #0069d9; /* Blue color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 15px 0; /* Adds space above and below the button */
+    cursor: pointer;
+}
+
+.btn-general:hover {
+    background-color: #007bff; /* Darker green on hover */
+}
+
+
+.btn-edit:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger:hover {
+    background-color: #0056b3;
+}
+
+.btn-create_ticket:hover {
     background-color: #0056b3;
 }
 
@@ -159,7 +184,6 @@ h2, h3 {
 /* Ticket History Table */
 .ticket-history-table {
     width: 100%;
-    border-collapse: collapse;
     margin-top: 20px;
 }
 
