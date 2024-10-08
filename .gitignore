@@ -2,4 +2,4 @@ venv
 __pycache__
 app.db
 todo.txt
-flask_session
+flask_session/

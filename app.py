@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, g, session, jsonify
 from flask_session import Session
+from flask.cli import with_appcontext
+import click
 from helpers import error_message, login_required
 from werkzeug.security import check_password_hash, generate_password_hash
 import sqlite3
@@ -29,6 +31,16 @@ def get_db():
        
 
     return db
+
+@click.command('init-db')
+@with_appcontext
+def init_db_command():
+    """Clear existing data and create new tables."""
+    init_db()
+    click.echo('Initialized the database.')
+
+# Register the command with the app
+app.cli.add_command(init_db_command)
 
 # Function to initialize the database (run once to create the table)
 def init_db():
@@ -265,6 +277,5 @@ def archive_ticket():
 
 
 if __name__ == '__main__':
-    init_db()
     session.clear()
     app.run(debug=True)
