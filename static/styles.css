@@ -149,6 +149,19 @@ h2, h3 {
     margin-top: 15px;
 }
 
+.btn-restore {
+    padding: 5px 10px;
+    background-color: #d39e00; /* Yellow color for a distinct look */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-restore:hover {
+    background-color: #d39e00; /* Darker yellow on hover */
+}
+
 .btn-general:hover {
     background-color: #007bff; /* Darker green on hover */
 }

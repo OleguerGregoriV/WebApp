@@ -276,6 +276,17 @@ def archive_ticket():
     return render_template('archived_tickets.html', tickets=tickets)
 
 
+@app.route('/restore_ticket/<int:ticket_id>', methods=['POST'])
+@login_required
+def restore_ticket(ticket_id: int):
+    db = get_db()
+    try:
+        cursor = db.cursor()
+        cursor.execute('UPDATE tickets SET is_archived = 0 WHERE id = ?', (ticket_id,))
+        db.commit()
+        return redirect(request.referrer or url_for('archived_tickets'))
+    except Exception as e:
+        return error_message(e)
 
 
 if __name__ == '__main__':
