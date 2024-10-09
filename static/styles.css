@@ -141,12 +141,12 @@ h2, h3 {
 
 .btn-general {
     padding: 5px 10px;
-    background-color: #0069d9; /* Blue color */
+    background-color: #0069d9;
     color: white;
     border: none;
     border-radius: 5px;
-    margin: 15px 0; /* Adds space above and below the button */
-    cursor: pointer;
+    display: inline-block;
+    margin-top: 15px;
 }
 
 .btn-general:hover {
