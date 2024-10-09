@@ -234,13 +234,15 @@ def delete_ticket(ticket_id):
     
 @app.route('/permanently_delete_ticket/<int:ticket_id>', methods=['POST'])
 @login_required
-def permanently_delete_ticket(ticket_id):
+def permanently_delete_ticket(ticket_id: int):
     db = get_db()
+    file = request.referrer.split('/')[-1]
     try:
         cursor = db.cursor()
         cursor.execute('DELETE from tickets WHERE id = ?', (ticket_id,))
         db.commit()
-        return redirect(url_for('ticket_history'))  # Redirect back to the main page
+        if file:
+            return redirect(url_for(file))  # Redirect back to the main page
     except Exception as e:
         return error_message(e)    
     
@@ -271,7 +273,7 @@ def archive_ticket():
     except Exception as e:
         return error_message(str(e))
     
-    return render_template('ticket_history.html', tickets=tickets)
+    return render_template('archived_tickets.html', tickets=tickets)
 
 
 
