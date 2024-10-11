@@ -77,7 +77,18 @@ Users can register or log in via the `/register` and `/login` routes:
 - **JavaScript**: For real-time updates on the dashboard.
 
 
-/ticket_planner/ ├── app.py # Flask application ├── sql_scripts/ # Folder containing SQL scripts │ └── create_tables.sql # SQL file to create the necessary tables ├── templates/ # Folder containing HTML templates │ ├── identification.html # Template for Register and Login forms │ ├── main.html # Dashboard to manage tickets │ └── edit_ticket.html # Page for editing tickets ├── static/ │ └── styles.css # CSS file for styling the app └── README.md # This file
+## Project Structure and Routes
+
+| Route               | Method    | Description                                          |
+|---------------------|-----------|------------------------------------------------------|
+| `/register`         | GET/POST  | User registration form and processing.               |
+| `/login`            | GET/POST  | User login form and processing.                      |
+| `/main`             | GET       | Main dashboard displaying user tickets.              |
+| `/create_ticket`    | POST      | Creates a new ticket and adds it to the dashboard.    |
+| `/edit_ticket`      | GET       | Displays the form for editing a ticket.              |
+| `/permanently_delete`| POST     | Permanently deletes a ticket from the database.      |
+| `/restore_ticket`   | POST      | Restores an archived ticket to the main dashboard.    |
+
 
 
 Pip install sqlite3 and flask
