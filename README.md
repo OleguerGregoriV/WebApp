@@ -79,15 +79,15 @@ Users can register or log in via the `/register` and `/login` routes:
 
 ## Project Structure and Routes
 
-| Route               | Method    | Description                                          |
-|---------------------|-----------|------------------------------------------------------|
-| `/register`         | GET/POST  | User registration form and processing.               |
-| `/login`            | GET/POST  | User login form and processing.                      |
-| `/main`             | GET       | Main dashboard displaying user tickets.              |
-| `/create_ticket`    | POST      | Creates a new ticket and adds it to the dashboard.    |
-| `/edit_ticket`      | GET       | Displays the form for editing a ticket.              |
-| `/permanently_delete`| POST     | Permanently deletes a ticket from the database.      |
-| `/restore_ticket`   | POST      | Restores an archived ticket to the main dashboard.    |
+| Route                 | Method    | Description                                                                   |
+|---------------------  |-----------|-------------------------------------------------------------------------------|
+| `/register`           | GET/POST  | User registration form and processing.                                        |
+| `/login`              | GET/POST  | User login form and processing.                                               |
+| `/main`               | GET       | Main dashboard displaying user tickets.                                       |
+| `/create_ticket`      | POST      | Creates a new ticket and adds it to the dashboard.                            |
+| `/edit_ticket`        | GET/POST  | Displays the form for editing a ticket and updates the content of the tickets.|
+| `/permanently_delete` | POST      | Permanently deletes a ticket from the database.                               |
+| `/restore_ticket`     | POST      | Restores an archived ticket to the main dashboard.                            |
 
 
 
