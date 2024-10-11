@@ -261,9 +261,9 @@ def ticket_history():
     return render_template('ticket_history.html', tickets=tickets)
 
 
-@app.route('/archive_ticket')
+@app.route('/archived_tickets')
 @login_required
-def archive_ticket():
+def archived_tickets():
     db = get_db()
     cursor = db.cursor()
     
@@ -274,6 +274,19 @@ def archive_ticket():
         return error_message(str(e))
     
     return render_template('archived_tickets.html', tickets=tickets)
+
+
+@app.route('/archive_ticket/<int:ticket_id>', methods=['POST'])
+@login_required
+def archive_ticket(ticket_id: int):
+    db = get_db()
+    try:
+        cursor = db.cursor()
+        cursor.execute('UPDATE tickets SET is_archived = 1 WHERE id = ?', (ticket_id,))
+        db.commit()
+        return redirect(url_for('main'))
+    except Exception as e:
+        return error_message(e)
 
 
 @app.route('/restore_ticket/<int:ticket_id>', methods=['POST'])

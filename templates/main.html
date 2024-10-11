@@ -21,6 +21,9 @@
                         <form action="{{ url_for('delete_ticket', ticket_id=ticket.id) }}" method="POST">
                             <button type="submit" class="btn-danger">Delete</button>
                         </form>
+                        <form action="{{ url_for('archive_ticket', ticket_id=ticket.id) }}" method="POST">
+                            <button type="submit" class="btn-archive">Archive</button>
+                        </form>
                     </div>
                 </li>
             {% else %}
@@ -86,6 +89,9 @@
                         <form action="/delete_ticket/${data.id}" method="POST">
                             <button type="submit"class="btn-danger">Delete</button>
                         </form>
+                       <form action="/archive_ticket/${data.id}" method="POST">
+                            <button type="submit"class="btn-archive">Archive</button>
+                        </form>                        
                     </div>`;
 
                 // const editButton = `<div class="ticket-actions"><form action="/edit_ticket/${data.id}" method="GET"><button type="submit" class="btn btn-edit">Edit</button></form></div>`;

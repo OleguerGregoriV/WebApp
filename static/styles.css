@@ -151,7 +151,16 @@ h2, h3 {
 
 .btn-restore {
     padding: 5px 10px;
-    background-color: #d39e00; /* Yellow color for a distinct look */
+    background-color: #d39e00; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-archive {
+    padding: 5px 10px;
+    background-color: #0069d9; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -159,11 +168,11 @@ h2, h3 {
 }
 
 .btn-restore:hover {
-    background-color: #d39e00; /* Darker yellow on hover */
+    background-color: #d39e00; 
 }
 
 .btn-general:hover {
-    background-color: #007bff; /* Darker green on hover */
+    background-color: #007bff; 
 }
 
 
@@ -179,21 +188,10 @@ h2, h3 {
     background-color: #0056b3;
 }
 
-/* Calendar Section */
-.calendar-overview {
-    margin-top: 40px;
+.btn-archive:hover {
+    background-color: #0056b3;
 }
 
-.calendar-overview h3 {
-    color: #333;
-}
-
-.calendar-overview .mini-calendar {
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
 /* Ticket History Table */
 .ticket-history-table {
     width: 100%;
