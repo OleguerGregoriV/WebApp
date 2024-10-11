@@ -4,7 +4,7 @@
 #### Description:
 # Ticket Planner App
 
-The **Ticket Planner** is a web-based application built with Flask that allows users to manage their tasks by creating tickets. Each ticket includes a title, description, and due date. The app also supports user registration and login, along with ticket management features like editing, deleting, and archiving.
+The **Ticket Planner** is a web-based application built with Flask that allows users to manage their tasks by creating tickets. Each ticket includes a title, description, and due date. The app also supports registration and login from different users, along with ticket management features like editing, deleting, and archiving.
 
 ## Features
 
@@ -26,9 +26,16 @@ The app uses an SQLite3 database to store data, with the following key tables:
 
 The SQL scripts for creating these tables are located in the `sql_scripts` folder.
 
-## File Structure
+## Folder Structure
 
-├── app.py # Flask application ├── sql_scripts # Folder containing SQL scripts │ └── create_tables.sql # SQL file to create the necessary tables ├── templates # Folder containing HTML templates │ ├── identification.html # Template for Register and Login forms │ ├── main.html # Dashboard to manage tickets │ └── edit_ticket.html # Page for editing tickets ├── static │ └── styles.css # CSS file for styling the app └── README.md # This file
+| File/Folder                 | Description                                     |
+|-----------------------------|-------------------------------------------------|
+| `app.py`                    | Flask application                               |
+| `sql_scripts/`              | Folder containing SQL scripts                   |
+| `templates/`                | Folder containing HTML templates                |
+| `static/`                   | Folder for static files                         |
+| `README.md`                 | This file                                       |
+
 
 
 ## How It Works
@@ -63,11 +70,12 @@ Users can register or log in via the `/register` and `/login` routes:
 ## How to Run
 
 1. Clone this repository.
-2. Install the required Python packages using:
+2. Install sqlite3 by sudo-apt get sqlite3
+3. Install the required Python packages using:
 
    ```bash
    pip install -r requirements.txt
-   flask init-db  
+   flask init-db 
    flask run
 
 ## Technologies Used
@@ -90,7 +98,3 @@ Users can register or log in via the `/register` and `/login` routes:
 | `/restore_ticket`     | POST      | Restores an archived ticket to the main dashboard.                            |
 
 
-
-Pip install sqlite3 and flask
-Must install sqlite3 via sudo-apt get sqlite3?
-flask init-db to initialize the database fefe
