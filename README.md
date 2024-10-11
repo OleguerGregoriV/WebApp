@@ -70,6 +70,25 @@ Users can register or log in via the `/register` and `/login` routes:
    flask init-db  
    flask run
 
+## Technologies Used
+- **Flask**: Web framework for Python.
+- **SQLite3**: Lightweight database for storing user and ticket data.
+- **HTML/CSS**: Frontend structure and styling.
+- **JavaScript**: For real-time updates on the dashboard.
+
+
+/ticket_planner/
+├── app.py                     # Flask application
+├── sql_scripts/                # Folder containing SQL scripts
+│   └── create_tables.sql       # SQL file to create the necessary tables
+├── templates/                  # Folder containing HTML templates
+│   ├── identification.html     # Template for Register and Login forms
+│   ├── main.html               # Dashboard to manage tickets
+│   └── edit_ticket.html        # Page for editing tickets
+├── static/
+│   └── styles.css              # CSS file for styling the app
+└── README.md                   # This file
+
 
 Pip install sqlite3 and flask
 Must install sqlite3 via sudo-apt get sqlite3?
