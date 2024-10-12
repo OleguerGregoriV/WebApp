@@ -143,7 +143,7 @@ def main():
             db = get_db()
             cursor = db.cursor()
             
-            user_tickets = cursor.execute('SELECT * FROM tickets WHERE user_id = ? and is_deleted = 0 and is_archived = 0 ORDER BY due_date ASC ', (1,))
+            user_tickets = cursor.execute('SELECT * FROM tickets WHERE user_id = ? and is_deleted = 0 and is_archived = 0 ORDER BY due_date ASC ', (session['user_id'],))
 
             tickets = user_tickets.fetchall()
 
@@ -207,12 +207,10 @@ def edit_ticket(ticket_id):
         title = request.form['title']
         description = request.form['description']
         due_date = request.form['due_date']
-        archive = request.form.get('archive')
-        is_archived = 1 if archive else 0
-
+        print(title, description, due_date)
         # Update the ticket in the database
-        cursor.execute('UPDATE tickets SET title = ?, description = ?, due_date = ?, is_archived = ? WHERE id = ?',
-                       (title, description, due_date, is_archived, ticket_id))
+        cursor.execute('UPDATE tickets SET title = ?, description = ?, due_date = ? WHERE id = ?',
+                       (title, description, due_date, ticket_id))
         db.commit()
 
         return redirect(url_for('main'))  # Redirect back to the dashboard
@@ -254,7 +252,7 @@ def ticket_history():
     
     try:
         # Fetch all tickets for the logged-in user
-        tickets = cursor.execute('SELECT * FROM tickets WHERE user_id = ?', (session['user_id'],)).fetchall()
+        tickets = cursor.execute('SELECT * FROM tickets WHERE user_id = ? and (is_deleted = 1 or is_archived = 1)', (session['user_id'],)).fetchall()
     except Exception as e:
         return error_message(str(e))
     

@@ -98,3 +98,4 @@ Users can register or log in via the `/register` and `/login` routes:
 | `/restore_ticket`     | POST      | Restores an archived ticket to the main dashboard.                            |
 
 
+-- Save changes not working
